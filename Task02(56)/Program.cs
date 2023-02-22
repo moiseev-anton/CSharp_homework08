@@ -11,6 +11,27 @@
 using System;
 using static System.Console;
 
+// Ввод числа с консоли
+int Prompt(string message)
+{
+    Write(message);
+    return Convert.ToInt32(ReadLine()!);
+}
+
+// Проверка заданного размера массива
+void CheckSizeMatrix(int r, int c)
+{   
+    if (r < 1 || c < 1)
+        {
+            WriteLine("Введены не корректные значения");
+            Environment.Exit(0); 
+        }
+    if (r == c) 
+        {
+            WriteLine("Массив НЕ прямоугольный");
+            //Environment.Exit(0); // Можно прервать программу если массив не прямоугольный.
+        }
+}
 
 // Заполнение двумерного массива
 int[,] GetMatrix(int m, int n, int minVal, int maxVal)
@@ -62,7 +83,7 @@ string FindMinSumRow(int[,] arr)
         if (i == 0 || sum < min)
         {
             min = sum; 
-            result = Convert.ToString(i + 1);
+            result = Convert.ToString(i + 1); // + 1 чтобы получить номер строки, а не индекс
         }
         else if (sum == min) // Дополнительная проверка если окажется несколько строк с минимальным значением
             result += ", " + Convert.ToString(i + 1);
@@ -72,7 +93,10 @@ string FindMinSumRow(int[,] arr)
 
 
 Clear();
-int[,] matrix = GetMatrix(5, 3, 1, 9); // Массив 5 строк, 3 столбца, рандом [1; 9].
+int rows = Prompt("Введите количесво строк ");
+int columns = Prompt("Введите количесво столбцов ");
+CheckSizeMatrix(rows, columns);
+int[,] matrix = GetMatrix(rows, columns, 1, 9); // Рандом [1; 9].
 PrintMatrix(matrix);
 WriteLine("\nСуммы по строкам:");
 string minRow = FindMinSumRow(matrix);
