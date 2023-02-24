@@ -87,7 +87,7 @@ void Print3DArray(int[,,] array)
 
 
 Clear();
-string size = Prompt("Введите размер массива через пробел: ");
+string size = Prompt("Введите размер массива через пробел (i j k): ");
 int[] lengths = StringToIntArray(size);
 ValidateMaxArraySize(lengths);
 int[,,] array3d = Get3DArray(lengths);
