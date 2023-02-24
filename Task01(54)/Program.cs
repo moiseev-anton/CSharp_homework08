@@ -12,6 +12,19 @@ using System;
 using static System.Console;
 
 
+// Ввод натурального числа с консоли
+int Prompt(string message)
+{
+    Write(message);
+    int num = Convert.ToInt32(ReadLine()!);
+    if (num < 1) // Проверяем натуральное ли число введено
+    {
+        WriteLine("Введено не корректное значение");
+        num = Prompt(message); // Если введено не натуральное число, программа предлагает повторить ввод
+    }
+    return num;
+}
+
 // Заполнение двумерного массива
 int[,] GetMatrix(int m, int n, int minVal, int maxVal)
 {
@@ -42,21 +55,21 @@ void PrintMatrix(int[,] array)
     }
 }
 
-// Сорторовка по убыванию элементов каждой строки двумерного массива
+// Сортировка по убыванию элементов в каждой строке двумерного массива
 void RowsSort(int[,] arr)
 {
-    for (int i = 0; i < arr.GetLength(0); i++)
+    for (int i = 0; i < arr.GetLength(0); i++) // Этим циклом переключаемся между строками
     {
-        for (int j = 0; j < arr.GetLength(1); j++)
+        for (int j = 0; j < arr.GetLength(1); j++) // Этим циклом выбираем элемент строки
         {
-            for (int k = j + 1; k < arr.GetLength(1); k++)
+            for (int k = j + 1; k < arr.GetLength(1); k++) // Этим циклом проходим по элементам в строке, следующим за выбранным. Производим сортировку
             {
-                if (arr[i,j] < arr[i,k])
-                    {
-                        int buffer = arr[i,j];
-                        arr[i,j] = arr[i,k];
-                        arr[i,k] = buffer;
-                    }
+                if (arr[i, j] < arr[i, k])
+                {
+                    int buffer = arr[i, j];
+                    arr[i, j] = arr[i, k];
+                    arr[i, k] = buffer;
+                }
             }
         }
     }
@@ -64,7 +77,9 @@ void RowsSort(int[,] arr)
 
 
 Clear();
-int[,] matrix = GetMatrix(5, 4, 0, 30); // Массив 5 строк, 4 столбца, рандом [0; 30].
+int m = Prompt("Введите количество строк: ");
+int n = Prompt("Введите количество столбцов: ");
+int[,] matrix = GetMatrix(m, n, 0, 30); // Рандом [0; 30].
 PrintMatrix(matrix);
 WriteLine($"\nРезультат:");
 RowsSort(matrix);
