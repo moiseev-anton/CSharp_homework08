@@ -14,11 +14,11 @@ int Prompt(string message)
 {
     Write(message);
     int num = Convert.ToInt32(ReadLine()!);
-    if (num < 1)
-        {
-            WriteLine("Введено не корректное значение");
-            num =  Prompt(message);
-        }
+    if (num < 1)  // Проверяем натуральное ли число введено
+    {
+        WriteLine("Введено не корректное значение");
+        num = Prompt(message); // Если введено не натуральное число, программа предлагает повторить ввод.
+    }
     return num;
 }
 
@@ -50,25 +50,30 @@ void PrintMatrix(int[,] array)
         }
         WriteLine();
     }
-    WriteLine();
+    WriteLine(); // Это просто отступ от выведенной матрицы
 }
 
 // Умножение матриц
-int[,]	MatrixMultiplication(int[,] arr1, int[,] arr2)
+int[,] MatrixMultiplication(int[,] arr1, int[,] arr2)
 {
     int[,] result = new int[arr1.GetLength(0), arr2.GetLength(1)];
 
-    for (int i = 0; i < arr1.GetLength(0); i++)
-        for (int j = 0; j < arr2.GetLength(1); j++)
-            for (int k = 0; k < arr1.GetLength(1); k++)
+    for (int i = 0; i < arr1.GetLength(0); i++) // Цикл перебирает строки матрицы А
+    {
+        for (int j = 0; j < arr2.GetLength(1); j++) // Цикл перебирает столбцы матрицы в
+        {
+            for (int k = 0; k < arr1.GetLength(1); k++) // Цикл перебирает столбцы матрицы А и строки матрицы В
             {
-                result[i,j] += arr1[i,k] * arr2[k,j];
+                result[i, j] += arr1[i, k] * arr2[k, j];
             }
+        }
+    }
     return result;
 }
 
 
 Clear();
+WriteLine("A x B\nКолчесво столбцов матрицы А должно равнятся количеству строк матрицы B");
 int rows1 = Prompt("Введите количесво строк матрицы А: ");
 int columns1 = Prompt("Введите количесво столбцов матрицы А: ");
 int rows2 = Prompt("Введите количесво строк матрицы В: ");
