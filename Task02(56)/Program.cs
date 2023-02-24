@@ -20,17 +20,17 @@ int Prompt(string message)
 
 // Проверка заданного размера массива
 void CheckSizeMatrix(int r, int c)
-{   
+{
     if (r < 1 || c < 1)
-        {
-            WriteLine("Введены не корректные значения");
-            Environment.Exit(0); 
-        }
-    if (r == c) 
-        {
-            WriteLine("Массив НЕ прямоугольный");
-            //Environment.Exit(0); // Можно прервать программу если массив не прямоугольный.
-        }
+    {
+        WriteLine("Введены не корректные значения");
+        Environment.Exit(0);
+    }
+    if (r == c)
+    {
+        WriteLine("Массив НЕ прямоугольный");
+        //Environment.Exit(0); // Можно прервать программу если массив не прямоугольный, но на процесс не влияет
+    }
 }
 
 // Заполнение двумерного массива
@@ -82,10 +82,10 @@ string FindMinSumRow(int[,] arr)
 
         if (i == 0 || sum < min)
         {
-            min = sum; 
+            min = sum;
             result = Convert.ToString(i + 1); // + 1 чтобы получить номер строки, а не индекс
         }
-        else if (sum == min) // Дополнительная проверка если окажется несколько строк с минимальным значением
+        else if (sum == min) // Дополнительная проверка если окажется несколько строк с минимальным значением.
             result += ", " + Convert.ToString(i + 1);
     }
     return result;
